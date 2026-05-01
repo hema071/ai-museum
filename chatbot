@@ -1,0 +1,46 @@
+from openai import OpenAI
+
+# i created the engine
+
+client = OpenAI(base_url = "https://openrouter.ai/api/v1",
+                api_key = "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")
+
+memory = [{"role": "system",
+           "content": "a museum guide."}]
+
+
+def get_user_message():  # message from me
+    message = input("User: ")  # i entered my message
+    memory.append({"role": "user", "content": message})  # i saved my message as myself
+    check_memory()  # i sent my message to get checked through the traffic
+
+
+def check_memory(): # goal is to make tasarruf and remove the first few messages
+    if len(memory) > 10:
+        # memory.append({"role": "user",
+        #                "content": "summarize everything we have talked about above especially the most important stuff in maximum of 3 sentences"})
+        del memory[1]
+        del memory[1]
+        del memory[1]
+        del memory[1]
+    send_input()
+
+
+def send_input():  # i am sending my message to the system
+    answer = client.chat.completions.create(model="openai/gpt-4o-mini", messages=memory)
+    recieve_output(answer)
+
+
+def recieve_output(system_answer):  # i am taking ai's message
+    real_answer = system_answer.choices[0].message.content
+    memory.append({"role": "assistant", "content": real_answer})
+    print(real_answer)
+
+
+
+while True:
+    get_user_message()
+
+
+
+
