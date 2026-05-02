@@ -19,15 +19,8 @@ if "messages" not in st.session_state:
 if message := st.chat_input("what would you like to learn? "):
     if message != "":
         st.session_state.messages.append({"role": "user", "content": message})  # i saved my message as myself
-    if len(st.session_state.messages) > 10:
-        # memory.append({"role": "user",
-        #                "content": "summarize everything we have talked about above especially the most important stuff in maximum of 3 sentences"})
-        del st.session_state.messages[1]
-        del st.session_state.messages[1]
-        del st.session_state.messages[1]
-        del st.session_state.messages[1]
 
-    answer = client.chat.completions.create(model="openai/gpt-4o-mini", messages=st.session_state.messages)
+    answer = client.chat.completions.create(model="openai/gpt-4o-mini", messages=st.session_state.messages[-10:])
     answer = answer.choices[0].message.content
     st.session_state.messages.append({"role": "assistant", "content": answer})
 
