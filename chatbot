@@ -3,7 +3,7 @@ from openai import OpenAI
 # i created the engine
 
 client = OpenAI(base_url = "https://openrouter.ai/api/v1",
-                api_key = "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")
+                api_key = "")
 
 memory = [{"role": "system",
            "content": "a museum guide."}]
