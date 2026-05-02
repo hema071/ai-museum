@@ -6,9 +6,10 @@ import sys
 
 
 st.title ("Museum AI") # creates my website
-client = OpenAI(base_url = "https://openrouter.ai/api/v1",
-                api_key = "your own api")
-
+client = OpenAI(
+    base_url="https://openrouter.ai/api/v1",
+    api_key=st.secrets["MY_OPENROUTER_KEY"] 
+)
 
 if "messages" not in st.session_state:
     st.session_state.messages = [{"role": "system",
