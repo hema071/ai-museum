@@ -7,7 +7,7 @@ import sys
 
 st.title ("Museum AI") # creates my website
 client = OpenAI(base_url = "https://openrouter.ai/api/v1",
-                api_key = "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")
+                api_key = "your own api")
 
 
 if "messages" not in st.session_state:
@@ -29,8 +29,6 @@ if message := st.chat_input("what would you like to learn? "):
     answer = client.chat.completions.create(model="openai/gpt-4o-mini", messages=st.session_state.messages)
     answer = answer.choices[0].message.content
     st.session_state.messages.append({"role": "assistant", "content": answer})
-    st.markdown(answer)
-
 
 
 
