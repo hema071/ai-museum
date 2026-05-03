@@ -18,10 +18,10 @@ if "messages" not in st.session_state:
 
 if message := st.chat_input("what would you like to learn? "):
     clean_message = message.strip()
-    if message == "":
+    if clean_message == "":
         print ("try again")
     else:
-        st.session_state.messages.append({"role": "user", "content": message})  # i saved my message as myself
+        st.session_state.messages.append({"role": "user", "content": clean_message})  # i saved my message as myself
         answer = client.chat.completions.create(model="openai/gpt-4o-mini", messages=st.session_state.messages[-10:])
         answer = answer.choices[0].message.content
         st.session_state.messages.append({"role": "assistant", "content": answer})
