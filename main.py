@@ -1,24 +1,18 @@
 from openai import OpenAI
 import streamlit as st
-import sys
+    
 
+# i created my website
 
-def man():
-    # i created my website
+st.title("Museum AI")
 
-    st.title("Museum AI")
+# i connected the car engine
+client = OpenAI(base_url="https://openrouter.ai/api/v1",api_key=st.secrets["MY_OPENROUTER_KEY"])
 
-    # i connected the car engine
-    client = OpenAI(
-        base_url="https://openrouter.ai/api/v1",
-        api_key=st.secrets["MY_OPENROUTER_KEY"]
-    )
+    
 
-    # 
-
-    if "messages" not in st.session_state:
-        st.session_state.messages = [{"role": "system",
-                                      "content": "you are an assistant that answers in short messages and not long ones"}]
+if "messages" not in st.session_state:
+    st.session_state.messages = [{"role": "system","content": "you are an assistant that answers in short messages and not long ones"}]
 
     # i created the text box and the sending system
 
@@ -27,7 +21,7 @@ def man():
         if clean_message == "":
             print("try again")
 
-        # i created the sending to engine system  
+        # i created the sending to engine system
 
         else:
             st.session_state.messages.append({"role": "user", "content": clean_message})  # i saved my message as myself
