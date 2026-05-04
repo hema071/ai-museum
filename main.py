@@ -13,8 +13,10 @@ def create():
         if clean_message == "":
             print("try again")
         else:
-            real_answer = engine.send(clean_message)
+            st.session_state.messages.append({"role": "user", "content": clean_message})
+            real_answer = engine.send(st.session_state.messages)
             st.session_state.messages.append({"role": "assistant", "content": real_answer})
+
 
     for one_message in st.session_state.messages[1:]:
         with st.chat_message(one_message["role"]):
