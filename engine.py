@@ -1,4 +1,5 @@
 from openai import OpenAI
+import streamlit as st
 
 def send(message_history):
     client = OpenAI(base_url="https://openrouter.ai/api/v1",
