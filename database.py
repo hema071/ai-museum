@@ -1,4 +1,5 @@
 import json
+import os
 
 def save(user_id, messages):
 
@@ -9,5 +10,7 @@ def save(user_id, messages):
 
 def load(user_id):
     file_path = f"C:/Users/hemas/OneDrive/Desktop/ai_files/{user_id}"
-    with open(file_path, "r") as file:  # ---------------> diffrent modes like w or x or a
-        print(f"txt file '{file}' was read")
+
+    if os.path.exists(file_path):
+        with open(file_path, "r") as file:  # ---------------> diffrent modes like w or x or a
+            print(f"txt file '{file}' was read")
