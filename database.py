@@ -13,4 +13,6 @@ def load(user_id):
 
     if os.path.exists(file_path):
         with open(file_path, "r") as file:  # ---------------> diffrent modes like w or x or a
-            print(f"txt file '{file}' was read")
+            print(f"txt file '{file_path}' was read")
+            
+    return file
