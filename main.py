@@ -1,5 +1,10 @@
 import streamlit as st
 import engine
+import uuid
+import database
+
+
+
 
 def create():
     st.title("Museum AI")
@@ -7,6 +12,15 @@ def create():
     if "messages" not in st.session_state:
         st.session_state.messages = [
             {"role": "system", "content": "you are an assistant that answers in short messages and not long ones"}]
+
+    if "id" not in st.query_params:
+        st.query_params["id"] = str(uuid.uuid4())
+        st.rerun()
+    else:
+       history = database.load(st.query_params["id"])
+       st.session_state.messages.append(history)
+
+
 
     if message := st.chat_input("what would you like to learn? "):
         clean_message = message.strip()
@@ -21,6 +35,8 @@ def create():
     for one_message in st.session_state.messages[1:]:
         with st.chat_message(one_message["role"]):
             st.markdown(one_message["content"])
+
+    database.save(st.query_params["id"], st.session_state.messages)
 
 
 if __name__ == "__main__":
