@@ -9,10 +9,12 @@ def save(user_id, messages):
         print(f"txt file '{file_path}' was created")
 
 def load(user_id):
-    file_path = f"C:/Users/hemas/OneDrive/Desktop/ai_files/{user_id}"
+    file_path = f"C:/Users/hemas/OneDrive/Desktop/ai_files/{user_id}.json"
 
     if os.path.exists(file_path):
         with open(file_path, "r") as file:  # ---------------> diffrent modes like w or x or a
-            print(f"txt file '{file_path}' was read")
+            data = json.load(file)
+            return data
             
-    return file
+
+    return []
