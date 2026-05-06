@@ -13,12 +13,12 @@ def create():
         st.session_state.messages = [
             {"role": "system", "content": "you are an assistant that answers in short messages and not long ones"}]
 
-    if "id" not in st.query_params:
-        st.query_params["id"] = str(uuid.uuid4())
-        st.rerun()
-    else:
-       history = database.load(st.query_params["id"])
-       st.session_state.messages.append(history)
+        if "id" not in st.query_params:
+            st.query_params["id"] = str(uuid.uuid4())
+            st.rerun()
+        else:
+            history = database.load(st.query_params["id"])
+            st.session_state.messages = history
 
 
 
