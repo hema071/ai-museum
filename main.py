@@ -18,7 +18,8 @@ def create():
             st.rerun()
         else:
             history = database.load(st.query_params["id"])
-            st.session_state.messages = history
+            if history:
+                st.session_state.messages = history
 
 
 
@@ -30,13 +31,13 @@ def create():
             st.session_state.messages.append({"role": "user", "content": clean_message})
             real_answer = engine.send(st.session_state.messages)
             st.session_state.messages.append({"role": "assistant", "content": real_answer})
+            database.save(st.query_params["id"], st.session_state.messages)
 
 
     for one_message in st.session_state.messages[1:]:
         with st.chat_message(one_message["role"]):
             st.markdown(one_message["content"])
 
-    database.save(st.query_params["id"], st.session_state.messages)
 
 
 if __name__ == "__main__":

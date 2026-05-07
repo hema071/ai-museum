@@ -1,9 +1,11 @@
 import json
 import os
 
+folder_path = f"C:/Users/hemas/OneDrive/Desktop/aifiles"
+
 def save(user_id, messages):
 
-    folder_path = f"C:/Users/hemas/OneDrive/Desktop/aifiles"
+
 
     if not os.path.exists(folder_path):
         os.makedirs(folder_path)
@@ -16,7 +18,7 @@ def save(user_id, messages):
         print(f"txt file '{folder_path}' was created")
 
 def load(user_id):
-    file_path = f"C:/Users/hemas/OneDrive/Desktop/ai/{user_id}.json"
+    file_path = f"C:/Users/hemas/OneDrive/Desktop/{folder_path}/{user_id}.json"
 
     if os.path.exists(file_path):
         with open(file_path, "r") as file:  # ---------------> diffrent modes like w or x or a
