@@ -18,7 +18,7 @@ def save(user_id, messages):
         print(f"txt file '{folder_path}' was created")
 
 def load(user_id):
-    file_path = f"C:/Users/hemas/OneDrive/Desktop/{folder_path}/{user_id}.json"
+    file_path = f"{folder_path}/{user_id}.json"
 
     if os.path.exists(file_path):
         with open(file_path, "r") as file:  # ---------------> diffrent modes like w or x or a
