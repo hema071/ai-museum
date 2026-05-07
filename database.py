@@ -3,11 +3,17 @@ import os
 
 def save(user_id, messages):
 
-    file_path = f"C:/Users/hemas/OneDrive/Desktop/ai/{user_id}.json"
-    
+    folder_path = f"C:/Users/hemas/OneDrive/Desktop/aifiles"
+
+    if not os.path.exists(folder_path):
+        os.makedirs(folder_path)
+        print(f"Klasör bulunamadı, yeni oluşturuldu: {folder_path}")
+
+    file_path = f"{folder_path}/{user_id}.json"
+
     with open(file_path, "w") as file:  # ---------------> diffrent modes like w or x or a
         json.dump(messages, file, indent=4)
-        print(f"txt file '{file_path}' was created")
+        print(f"txt file '{folder_path}' was created")
 
 def load(user_id):
     file_path = f"C:/Users/hemas/OneDrive/Desktop/ai/{user_id}.json"
