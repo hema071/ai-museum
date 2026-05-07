@@ -36,6 +36,7 @@ def create():
 
     for one_message in st.session_state.messages[1:]:
         with st.chat_message(one_message["role"]):
+            st.markdown(f"Save this link to get back to the chat later: https://mainpy-dn3dqs3bybdka5ibq52eam.streamlit.app/?id={ st.query_params["id"]}")
             st.markdown(one_message["content"])
 
 
