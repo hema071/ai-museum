@@ -62,7 +62,7 @@ def create():
                 st.session_state.messages.append({"role": "user", "content": clean_message})
                 real_answer = engine.send(st.session_state.system_prompt + st.session_state.messages)
                 st.session_state.messages.append({"role": "assistant", "content": real_answer})
-                database.save(st.query_params["id"], st.session_state.messages)
+                database.save(st.query_params["id"], st.session_state.messages, st.session_state.username, st.session_state.mode)
 
         st.markdown(
             f"Save this link to get back to the chat later: https://mainpy-dn3dqs3bybdka5ibq52eam.streamlit.app/?id={st.query_params["id"]}")
@@ -77,7 +77,9 @@ def create():
 
     history = database.load(st.query_params["id"])
     if history:
-        st.session_state.messages = history
+        st.session_state.messages = history["messages"]
+        st.session_state.username = history["username"]
+        st.session_state.mode = history["mode"]
         start()
     else:
         if not st.session_state.started:
