@@ -82,6 +82,7 @@ def create():
     else:
         if not st.session_state.started:
             popup()
+            st.markdown ("if you see empty page, please refresh and fill the information to have the access.")
         else:
             start()
 
