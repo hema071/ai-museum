@@ -12,6 +12,23 @@ def create():
         st.session_state.messages = [
             {"role": "system", "content": "you are an assistant that answers in short messages and not long ones"}] # I gave the name messages
 
+
+    if "mode" not in st.session_state:
+        st.session_state.mode = "fast"
+
+    if "username" not in st.session_state:
+        st.session_state.username = ""
+
+    if "started" not in st.session_state:
+        st.session_state.started = False
+
+    if not st.session_state.started:
+        st.text_input ("What should we call you?")
+        st.selectbox ("Select your mode", "Detailed, Child, Fast")
+
+
+
+
     st.title("Museum AI")
 
 
