@@ -69,6 +69,12 @@ def create():
 
 
 
+
+
+
+
+
+
     if "id" not in st.query_params:
         st.query_params["id"] = str(uuid.uuid4())
 
@@ -84,6 +90,17 @@ def create():
             st.markdown ("if you see empty page, please refresh and fill the information to have the access.")
         else:
             start()
+
+    @st.dialog("Are you sure?")
+    def verification():
+        if st.button("Yes"):
+            del st.session_state.messages[0:1]
+            popup()
+
+    with st.sidebar:
+        st.title("Settings")
+        if st.button ("change mode"):
+            verification()
 
 
 
