@@ -76,10 +76,11 @@ def create():
         st.query_params["id"] = str(uuid.uuid4())
 
     history = database.load(st.query_params["id"])
+    new_history = dict(history)
     if history:
-        st.session_state.messages = history["messages"]
-        st.session_state.username = history["username"]
-        st.session_state.mode = history["mode"]
+        st.session_state.messages = new_history["messages"]
+        st.session_state.username = new_history["username"]
+        st.session_state.mode = new_history["mode"]
         start()
     else:
         if not st.session_state.started:
