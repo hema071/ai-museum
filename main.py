@@ -49,7 +49,7 @@ def create():
             st.session_state.started = True
             st.rerun()
 
-    
+
 
 
 
@@ -63,8 +63,8 @@ def create():
     if "id" not in st.query_params:
         if not st.session_state.started:
             popup()
-        st.query_params["id"] = str(uuid.uuid4())
-        st.rerun()
+            st.query_params["id"] = str(uuid.uuid4())
+            st.rerun()
     else:
         history = database.load(st.query_params["id"])
         if history:
