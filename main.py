@@ -96,7 +96,6 @@ def create():
         if st.button("Yes"):
             del st.session_state.messages[0:1]
             st.session_state.started = False
-            popup()
 
     with st.sidebar:
         st.title("Settings")
