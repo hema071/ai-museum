@@ -57,7 +57,7 @@ def create():
                 print("try again")
             else:
                 st.session_state.messages.append({"role": "user", "content": clean_message})
-                real_answer = engine.send(st.session_state.st.session_state.messages)
+                real_answer = engine.send(st.session_state.messages)
                 st.session_state.messages.append({"role": "assistant", "content": real_answer})
                 database.save(st.query_params["id"], st.session_state.messages, st.session_state.username, st.session_state.mode)
 
