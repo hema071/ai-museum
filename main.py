@@ -80,10 +80,17 @@ def create():
 
     history = database.load(st.query_params["id"])
     if history:
-        st.session_state.messages = history["messages"]
-        st.session_state.username = history["username"]
-        st.session_state.mode = history["mode"]
-        start()
+        if not st.session_state.started:
+            st.session_state.messages = history["messages"]
+            st.session_state.username = history["username"]
+            st.session_state.mode = history["mode"]
+            popup()
+            start()
+        else:
+            st.session_state.messages = history["messages"]
+            st.session_state.username = history["username"]
+            st.session_state.mode = history["mode"]
+            start()
     else:
         if not st.session_state.started:
             popup()
