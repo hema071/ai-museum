@@ -39,7 +39,7 @@ def create():
             if st.session_state.mode == "Detailed":
                 st.session_state.system_prompt.append ({"role": "system", "content": "You are a intelligent museum guide. Explain everything needed in detail. Include important facts and deeper explanations when needed."})
             elif st.session_state.mode == "Child":
-                st.session_state.system_prompt.append ({"role": "system", "content": "You are a museum guide talking to a child. Explain everything in very simple words, short sentences, and make it fun and easy to imagine. Avoid long explanations and difficult terms."})
+                st.session_state.system_prompt.append ({"role": "system", "content": "You are a museum guide talking to a child. Explain everything in very simple words, short sentences, and make it fun and easy to imagine. Avoid long explanations and difficult terms. use emojis"})
             elif st.session_state.mode == "Fast":
                 st.session_state.system_prompt.append ({"role": "system", "content": "You are a museum guide. Answer fast and directly. Keep important facts but do not add extra detail or long explanations."})
             elif st.session_state.mode == "Default":
