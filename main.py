@@ -23,8 +23,9 @@ def create():
         st.session_state.started = False
 
     if not st.session_state.started:
+        st.dialog()
         st.text_input ("What should we call you?")
-        st.selectbox ("Select your mode", "Detailed, Child, Fast")
+        st.selectbox ("Select your mode", ["Detailed", "Child", "Fast"])
 
 
 
