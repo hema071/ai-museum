@@ -47,6 +47,16 @@ def create():
 
             st.session_state.system_prompt.append ({"role": "system", "content": f"your user's name is {st.session_state.username}"})
             st.session_state.started = True
+            if "id" not in st.query_params:
+                    st.query_params["id"] = str(uuid.uuid4())
+                    st.rerun()
+            else:
+                history = database.load(st.query_params["id"])
+                if history:
+                    st.session_state.messages = history
+            
+            
+            
             st.rerun()
 
 
@@ -57,18 +67,8 @@ def create():
 
     st.title("Museum AI")
 
-
-
-
-    if "id" not in st.query_params:
-        if not st.session_state.started:
-            popup()
-            st.query_params["id"] = str(uuid.uuid4())
-            st.rerun()
-    else:
-        history = database.load(st.query_params["id"])
-        if history:
-             st.session_state.messages = history
+    if not st.session_state.started:
+        popup()
 
 
 
