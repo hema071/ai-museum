@@ -6,6 +6,6 @@ def send(message_history):
                     api_key=st.secrets["MY_OPENROUTER_KEY"])
 
     answer = client.chat.completions.create(model="openai/gpt-4o-mini",
-                                            messages=message_history[-10:])
+                                            messages = message_history[:2] + message_history[-10:])
     answer = answer.choices[0].message.content
     return answer

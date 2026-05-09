@@ -11,9 +11,6 @@ def create():
     if "messages" not in st.session_state:
         st.session_state.messages = [] # I gave the name messages
 
-    if "system_prompt" not in st.session_state:
-        st.session_state.system_prompt = []
-
 
     if "mode" not in st.session_state:
         st.session_state.mode = "fast"
@@ -37,15 +34,15 @@ def create():
             st.session_state.username = name
             st.session_state.mode = mode
             if st.session_state.mode == "Detailed":
-                st.session_state.system_prompt.append ({"role": "system", "content": "You are a intelligent museum guide. Explain everything needed in detail. Include important facts and deeper explanations when needed."})
+                st.session_state.messages.append ({"role": "system", "content": "You are a intelligent museum guide. Explain everything needed in detail. Include important facts and deeper explanations when needed."})
             elif st.session_state.mode == "Child":
-                st.session_state.system_prompt.append ({"role": "system", "content": "You are a museum guide talking to a child. Explain everything in very simple words, short sentences, and make it fun and easy to imagine. Avoid long explanations and difficult terms. use emojis"})
+                st.session_state.messages.append ({"role": "system", "content": "You are a museum guide talking to a child. Explain everything in very simple words, short sentences, and make it fun and easy to imagine. Avoid long explanations and difficult terms. use emojis"})
             elif st.session_state.mode == "Fast":
-                st.session_state.system_prompt.append ({"role": "system", "content": "You are a museum guide. Answer fast and directly. Keep important facts but do not add extra detail or long explanations."})
+                st.session_state.messages.append ({"role": "system", "content": "You are a museum guide. Answer fast and directly. Keep important facts but do not add extra detail or long explanations."})
             elif st.session_state.mode == "Default":
-                st.session_state.system_prompt.append ({"role": "system", "content": "You are a museum guide. Explain clearly and balanced. not too short, not too long. Include important details but stay easy to understand."})
+                st.session_state.messages.append ({"role": "system", "content": "You are a museum guide. Explain clearly and balanced. not too short, not too long. Include important details but stay easy to understand."})
 
-            st.session_state.system_prompt.append ({"role": "system", "content": f"your user's name is {st.session_state.username}"})
+            st.session_state.messages.append ({"role": "system", "content": f"your user's name is {st.session_state.username}"})
             st.session_state.started = True
 
             st.rerun()
@@ -60,7 +57,7 @@ def create():
                 print("try again")
             else:
                 st.session_state.messages.append({"role": "user", "content": clean_message})
-                real_answer = engine.send(st.session_state.system_prompt + st.session_state.messages)
+                real_answer = engine.send(st.session_state.st.session_state.messages)
                 st.session_state.messages.append({"role": "assistant", "content": real_answer})
                 database.save(st.query_params["id"], st.session_state.messages, st.session_state.username, st.session_state.mode)
 
