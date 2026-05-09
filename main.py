@@ -21,12 +21,12 @@ def create():
 
     if "started" not in st.session_state:
         st.session_state.started = False
-        
 
 
 
 
-    @st.dialog
+
+    @st.dialog ("Before continuing...")
     def popup():
         st.title("Before continuing...")
         name = st.text_input("What should we call you?")
@@ -43,7 +43,7 @@ def create():
                 st.session_state.messages.append ({"role": "system", "content": "you are an intelligent museum guide and your mission is explaining everything your user asks about quickly and using only short messages. you must not skip any important details"})
             elif st.session_state.mode == "Default":
                 st.session_state.messages.append ({"role": "system", "content": "you are an intelligent museum guide and your mission is explaining everything your user asks about in a normal way. not too long, not too short and you must not skip any important details"})
-            
+
             st.session_state.messages.append ({"role": "system", "content": f"your user's name is {st.session_state.username}"})
             st.session_state.started = True
             st.rerun()
