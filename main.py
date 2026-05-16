@@ -66,7 +66,7 @@ def create():
         for one_message in st.session_state.messages:
             with st.chat_message(one_message["role"]):
                 st.markdown(one_message["content"])
-                
+
 
     @st.dialog("Are you sure?")
     def verification():
@@ -86,19 +86,18 @@ def create():
             st.session_state.messages = history["messages"]
             st.session_state.username = history["username"]
             st.session_state.mode = history["mode"]
-            
+            st.session_state.started = True
+            start()
             
             with st.sidebar:
                 st.title("Settings")
                 if st.button("change mode"):
                     verification()
                     
-                else:
-                    st.session_state.started = True
-                    start()
+                    
 
             
-            
+
         else:
             st.session_state.messages = history["messages"]
             st.session_state.username = history["username"]
@@ -111,7 +110,7 @@ def create():
         else:
             start()
 
-    
+
 
 
 
