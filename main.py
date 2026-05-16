@@ -101,7 +101,8 @@ def create():
     @st.dialog("Are you sure?")
     def verification():
         if st.button("Yes"):
-            del st.session_state.messages[0:1]
+            del st.session_state.messages[0]
+            del st.session_state.messages[1]
             st.session_state.started = False
             st.rerun()
 
