@@ -116,7 +116,8 @@ def create():
         if st.button("Yes"):
             st.session_state.change = True
             st.rerun()
-
+        else:
+            print ("the user passed")
     with st.sidebar:
       st.title("Settings")
       if st.button("change mode"):
