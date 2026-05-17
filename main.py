@@ -51,7 +51,6 @@ def create():
 
             st.session_state.messages[1] = ({"role": "system", "content": f"your user's name is {st.session_state.username}"})
             st.session_state.started = True
-            st.session_state.change = False
 
             database.save(st.query_params["id"], st.session_state.messages, st.session_state.username,
                           st.session_state.mode)
@@ -88,6 +87,7 @@ def create():
             st.session_state.messages = history["messages"]
             st.session_state.username = history["username"]
             st.session_state.mode = history["mode"]
+            st.session_state.change = False
             popup()
 
     if history and not st.session_state.started:
@@ -116,11 +116,10 @@ def create():
         if st.button("Yes"):
             st.session_state.change = True
             st.rerun()
-        
+
     with st.sidebar:
       st.title("Settings")
       if st.button("change mode"):
-        st.session_state.change = False
         verification()
 
 
