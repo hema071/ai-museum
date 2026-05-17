@@ -46,6 +46,9 @@ def create():
             st.session_state.messages[1] = ({"role": "system", "content": f"your user's name is {st.session_state.username}"})
             st.session_state.started = True
 
+            database.save(st.query_params["id"], st.session_state.messages, st.session_state.username,
+                          st.session_state.mode)
+
             st.rerun()
 
     def start():
@@ -79,6 +82,7 @@ def create():
             st.session_state.username = history["username"]
             st.session_state.mode = history["mode"]
             popup()
+
 
     elif history and st.session_state.started:
         st.session_state.messages = history["messages"]
