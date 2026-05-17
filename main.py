@@ -32,16 +32,16 @@ def create():
             st.session_state.mode = mode
             if st.session_state.mode == "Detailed":
                 st.session_state.messages[0] = ({"role": "system",
-                                                  "content": "You are a intelligent museum guide. Explain everything needed in detail. Include important facts and deeper explanations when needed. The mode has changed to Detailed. Previous assistant style should not be followed."})
+                                                  "content": "You are a intelligent museum guide. Explain everything needed in detail. Include important facts and deeper explanations when needed. The mode has changed to Detailed. Note: the system prompt is the top priority. If you see another tone in the other messages do not continue using it and consider this prompt."})
             elif st.session_state.mode == "Child":
                 st.session_state.messages[0] = ({"role": "system",
-                                                  "content": "You are a museum guide talking to a child. Explain everything in very simple words, short sentences, and make it fun and easy to imagine. Avoid long explanations and difficult terms. use emojis. The mode has changed to Child. Previous assistant style should not be followed."})
+                                                  "content": "You are a museum guide talking to a child. Explain everything in very simple words, short sentences, and make it fun and easy to imagine. Avoid long explanations and difficult terms. use emojis. The mode has changed to Child. Note: the system prompt is the top priority. If you see another tone in the other messages do not continue using it and consider this prompt."})
             elif st.session_state.mode == "Fast":
                 st.session_state.messages[0] = ({"role": "system",
-                                                  "content": "You are a museum guide. Answer fast and directly. Keep important facts but do not add extra detail or long explanations.The mode has changed to Fast. Previous assistant style should not be followed."})
+                                                  "content": "You are a museum guide. Answer fast and directly. Keep important facts but do not add extra detail or long explanations.The mode has changed to Fast. Note: the system prompt is the top priority. If you see another tone in the other messages do not continue using it and consider this prompt."})
             elif st.session_state.mode == "Default":
                 st.session_state.messages[0] = ({"role": "system",
-                                                  "content": "You are a museum guide. Explain clearly and balanced. not too short, not too long. Include important details but stay easy to understand. The mode has changed to Default. Previous assistant style should not be followed."})
+                                                  "content": "You are a museum guide. Explain clearly and balanced. not too short, not too long. Include important details but stay easy to understand. The mode has changed to Default. Note: the system prompt is the top priority. If you see another tone in the other messages do not continue using it and consider this prompt."})
 
             st.session_state.messages[1] = ({"role": "system", "content": f"your user's name is {st.session_state.username}"})
             st.session_state.started = True
