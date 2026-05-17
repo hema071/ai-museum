@@ -17,8 +17,7 @@ def create():
     if "started" not in st.session_state:
         st.session_state.started = False
 
-    if "show_popup" not in st.session_state:
-        st.session_state.show_popup = False
+    
 
     @st.dialog("Before continuing...")
     def popup():
@@ -77,7 +76,7 @@ def create():
             st.session_state.messages = history["messages"]
             st.session_state.username = history["username"]
             st.session_state.mode = history["mode"]
-            st.session_state.started = True
+            popup()
             start()
 
     elif history and st.session_state.started:
@@ -89,7 +88,7 @@ def create():
     elif not history and not st.session_state.started:
         popup()
         st.markdown("if you see empty page, please refresh and fill the information to have the access.")
-    
+
     elif not history and st.session_state.started:
         start()
 
@@ -100,7 +99,7 @@ def create():
         if st.button("Yes"):
             del st.session_state.messages[0]
             del st.session_state.messages[1]
-            st.session_state.show_popup = True
+            st.session_state.started = False
             st.rerun()
 
     with st.sidebar:
