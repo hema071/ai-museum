@@ -99,15 +99,13 @@ def create():
     @st.dialog("Are you sure?")
     def verification():
         if st.button("Yes"):
-            del st.session_state.messages[0]
-            del st.session_state.messages[1]
             st.session_state.started = False
             st.rerun()
 
     with st.sidebar:
-        st.title("Settings")
-        if st.button("change mode"):
-            verification()
+      st.title("Settings")
+      if st.button("change mode"):
+        verification()
 
 
 if __name__ == "__main__":
