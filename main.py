@@ -79,7 +79,6 @@ def create():
             st.session_state.username = history["username"]
             st.session_state.mode = history["mode"]
             popup()
-            start()
 
     elif history and st.session_state.started:
         st.session_state.messages = history["messages"]
