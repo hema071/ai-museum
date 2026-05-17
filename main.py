@@ -89,6 +89,7 @@ def create():
             st.session_state.mode = history["mode"]
             st.session_state.change = False
             popup()
+            start()
 
     elif history and not st.session_state.started:
         st.session_state.messages = history["messages"]
