@@ -20,6 +20,9 @@ def create():
     if "started" not in st.session_state:
         st.session_state.started = False
 
+    if "change" not in st.session_state:
+        st.session_state.change = False
+
 
 
     @st.dialog("Before continuing...")
@@ -28,7 +31,7 @@ def create():
         mode = st.selectbox("Select your mode", ["Detailed", "Child", "Fast", "Default"])
 
         clean_name = name.strip()
-        
+
 
         if st.button("lets begin", disabled=(clean_name == "")):
             st.session_state.username = name
@@ -48,6 +51,7 @@ def create():
 
             st.session_state.messages[1] = ({"role": "system", "content": f"your user's name is {st.session_state.username}"})
             st.session_state.started = True
+            st.session_state.started = False
 
             database.save(st.query_params["id"], st.session_state.messages, st.session_state.username,
                           st.session_state.mode)
@@ -80,7 +84,7 @@ def create():
         st.query_params["id"] = str(uuid.uuid4())
 
     history = database.load(st.query_params["id"])
-    if history and not st.session_state.started:
+    if history and st.session_state.change:
             st.session_state.messages = history["messages"]
             st.session_state.username = history["username"]
             st.session_state.mode = history["mode"]
@@ -105,7 +109,7 @@ def create():
     @st.dialog("Are you sure?")
     def verification():
         if st.button("Yes"):
-            st.session_state.started = False
+            st.session_state.change = True
             st.rerun()
 
     with st.sidebar:
