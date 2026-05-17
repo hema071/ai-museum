@@ -51,7 +51,7 @@ def create():
 
             st.session_state.messages[1] = ({"role": "system", "content": f"your user's name is {st.session_state.username}"})
             st.session_state.started = True
-            st.session_state.started = False
+            st.session_state.change = False
 
             database.save(st.query_params["id"], st.session_state.messages, st.session_state.username,
                           st.session_state.mode)
