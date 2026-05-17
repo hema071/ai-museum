@@ -89,6 +89,8 @@ def create():
     elif not history and not st.session_state.started:
         popup()
         st.markdown("if you see empty page, please refresh and fill the information to have the access.")
+    
+    elif not history and st.session_state.started:
         start()
 
 
