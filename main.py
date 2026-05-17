@@ -64,7 +64,7 @@ def create():
             with st.chat_message(one_message["role"]):
                 st.markdown(one_message["content"])
 
-    
+
 
     if "id" not in st.query_params:
         st.query_params["id"] = str(uuid.uuid4())
@@ -96,8 +96,8 @@ def create():
         if st.button("Yes"):
             del st.session_state.messages[0]
             del st.session_state.messages[1]
-            st.session_state.started = False
-            st.rerun()
+            popup()
+            
 
     with st.sidebar:
         st.title("Settings")
