@@ -83,24 +83,24 @@ def create():
             st.session_state.mode = history["mode"]
             st.session_state.started = True
             start()
+
+
+        else:
+            st.session_state.messages = history["messages"]
+            st.session_state.username = history["username"]
+            st.session_state.mode = history["mode"]
+            start()
     else:
         if not st.session_state.started:
             popup()
             st.markdown("if you see empty page, please refresh and fill the information to have the access.")
-        
+        else:
+            start()
 
     with st.sidebar:
         st.title("Settings")
         if st.button("change mode"):
             verification()
-
-
-
-
-
-
-
-
 
 
 if __name__ == "__main__":
