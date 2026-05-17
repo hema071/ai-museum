@@ -79,17 +79,18 @@ def create():
             st.session_state.mode = history["mode"]
             st.session_state.started = True
             start()
-    
+
     elif history and st.session_state.started:
         st.session_state.messages = history["messages"]
         st.session_state.username = history["username"]
         st.session_state.mode = history["mode"]
         start()
-    
+
     elif not history and not st.session_state.started:
         popup()
         st.markdown("if you see empty page, please refresh and fill the information to have the access.")
-    
+        start()
+
 
 
     @st.dialog("Are you sure?")
