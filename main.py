@@ -17,6 +17,9 @@ def create():
     if "started" not in st.session_state:
         st.session_state.started = False
 
+    if "show_popup" not in st.session_state:
+        st.session_state.show_popup = False
+
     @st.dialog("Before continuing...")
     def popup():
         name = st.text_input("What should we call you?")
@@ -70,34 +73,32 @@ def create():
         st.query_params["id"] = str(uuid.uuid4())
 
     history = database.load(st.query_params["id"])
-    if history:
-        if not st.session_state.started:
+    if history and not st.session_state.started:
             st.session_state.messages = history["messages"]
             st.session_state.username = history["username"]
             st.session_state.mode = history["mode"]
             st.session_state.started = True
             start()
+    
+    elif history and st.session_state.started:
+        st.session_state.messages = history["messages"]
+        st.session_state.username = history["username"]
+        st.session_state.mode = history["mode"]
+        start()
+    
+    elif not history and not st.session_state.started:
+        popup()
+        st.markdown("if you see empty page, please refresh and fill the information to have the access.")
+    
 
-
-        else:
-            st.session_state.messages = history["messages"]
-            st.session_state.username = history["username"]
-            st.session_state.mode = history["mode"]
-            start()
-    else:
-        if not st.session_state.started:
-            popup()
-            st.markdown("if you see empty page, please refresh and fill the information to have the access.")
-        else:
-            start()
 
     @st.dialog("Are you sure?")
     def verification():
         if st.button("Yes"):
             del st.session_state.messages[0]
             del st.session_state.messages[1]
-            popup()
-            
+            st.session_state.show_popup = True
+            st.rerun()
 
     with st.sidebar:
         st.title("Settings")
